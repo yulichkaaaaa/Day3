@@ -17,13 +17,13 @@ public class BasketService {
         return weight;
     }
 
-    public int amountBlueBalls(Basket basket){
+    public int amountBallsOneColor(Basket basket, Color ballColor){
         List<Ball> balls = basket.getBalls();
         int count = 0;
         Color color;
         for(Ball ball : balls){
             color = ball.getColor();
-            if(color == Color.BLUE){
+            if(color == ballColor){
                 count++;
             }
         }

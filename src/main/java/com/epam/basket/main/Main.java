@@ -22,7 +22,7 @@ public class Main {
 
         Basket basket = new Basket(balls);
         BasketService service = new BasketService();
-        int blueBalls = service.amountBlueBalls(basket);
+        int blueBalls = service.amountBallsOneColor(basket, Color.BLUE);
         int weight = service.countWeight(basket);
 
         BasketReport report = new BasketReport();

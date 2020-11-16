@@ -4,9 +4,7 @@ import com.epam.basket.entity.Ball;
 import com.epam.basket.entity.Basket;
 import com.epam.basket.entity.Color;
 import com.epam.basket.service.BasketService;
-import org.testng.annotations.Test;
-
-import static org.testng.Assert.assertSame;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -18,27 +16,7 @@ public class BasketServiceTest {
 
     List<Ball> balls;
 
-
-    @Test
-    public void countWeightTest(){
-        initializeBalls();
-        Basket basket = new Basket(balls);
-        BasketService service = new BasketService();
-        int actual = service.countWeight(basket);
-        int expected = 3300;
-        assertEquals(actual, expected);
-    }
-
-    @Test
-    public void amountBlueBallsTest(){
-        initializeBalls();
-        Basket basket = new Basket(balls);
-        BasketService service = new BasketService();
-        int actual = service.amountBlueBalls(basket);
-        int expected = 3;
-        assertEquals(actual, expected);
-    }
-
+    @BeforeTest
     private void initializeBalls(){
         balls = new ArrayList<>();
         balls.add(new Ball(Color.GREEN, 200));
@@ -49,4 +27,23 @@ public class BasketServiceTest {
         balls.add(new Ball(Color.WHITE, 800));
         balls.add(new Ball(Color.BLUE, 500));
     }
+
+    @Test
+    public void countWeightTest(){
+        Basket basket = new Basket(balls);
+        BasketService service = new BasketService();
+        int actual = service.countWeight(basket);
+        int expected = 3300;
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void amountBallsOneColorTest(){
+        Basket basket = new Basket(balls);
+        BasketService service = new BasketService();
+        int actual = service.amountBallsOneColor(basket, Color.BLUE);
+        int expected = 3;
+        assertEquals(actual, expected);
+    }
+
 }
