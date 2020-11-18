@@ -1,12 +1,12 @@
 package com.epam.basket.entity;
 
 public enum Color {
-    BLUE,
-    GREEN,
-    YELLOW,
-    ORANGE,
-    RED,
-    PURPLE,
     WHITE,
+    RED,
+    ORANGE,
+    YELLOW,
+    GREEN,
+    BLUE,
+    PURPLE,
     BLACK
 }

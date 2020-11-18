@@ -13,11 +13,11 @@ public class Basket {
     }
 
     public List<Ball> getBalls() {
-        return balls;
+        return new ArrayList<>(balls);
     }
 
     public void setBalls(List<Ball> balls) {
-        this.balls.addAll(balls);
+        this.balls = balls;
     }
 
     public void addBall(Ball ball){

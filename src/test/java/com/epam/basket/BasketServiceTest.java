@@ -14,7 +14,7 @@ import static org.testng.Assert.*;
 
 public class BasketServiceTest {
 
-    List<Ball> balls;
+    private List<Ball> balls;
 
     @BeforeTest
     private void initializeBalls(){
