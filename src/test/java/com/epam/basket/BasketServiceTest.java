@@ -90,7 +90,7 @@ public class BasketServiceTest {
         Ball[] balls = service.findBallsByColor(basket, Color.BLUE);
         boolean condition = true;
         int i = 0;
-        while(i < balls.length || condition){
+        while(i < balls.length && condition){
             if(balls[i].getColor() != Color.BLUE){
                 condition = false;
             }
@@ -104,7 +104,7 @@ public class BasketServiceTest {
         Ball[] balls = service.findBallsByWeight(basket, 200);
         boolean condition = true;
         int i = 0;
-        while(i < balls.length || condition){
+        while(i < balls.length && condition){
             if(balls[i].getWeight() != 200){
                 condition = false;
             }
