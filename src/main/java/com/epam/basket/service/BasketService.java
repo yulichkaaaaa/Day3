@@ -4,12 +4,10 @@ import com.epam.basket.entity.Ball;
 import com.epam.basket.entity.Basket;
 import com.epam.basket.entity.Color;
 
-import java.util.List;
-
-public class BasketService {
+public class BasketService{
 
     public int countWeight(Basket basket){
-        List<Ball> balls = basket.getBalls();
+        Ball[] balls = basket.getBalls();
         int weight = 0;
         for(Ball ball : balls){
             weight += ball.getWeight();
@@ -18,7 +16,7 @@ public class BasketService {
     }
 
     public int amountBallsOneColor(Basket basket, Color ballColor){
-        List<Ball> balls = basket.getBalls();
+        Ball[] balls = basket.getBalls();
         int count = 0;
         Color color;
         for(Ball ball : balls){
@@ -31,41 +29,76 @@ public class BasketService {
     }
 
     public void weightSort(Basket basket){
-        List<Ball> balls= basket.getBalls();
+        Ball[] balls = basket.getBalls();
         Ball min, temp;
-        int minInd = 0;
-        for(int i = 0; i < balls.size(); i++){
-            min = balls.get(i);
+        int minInd;
+        for(int i = 0; i < balls.length; i++){
+            min = balls[i];
             minInd = i;
-            for(int j = i + 1; j < balls.size(); j++){
-                if(balls.get(j).getWeight() < min.getWeight()){
-                    min = balls.get(j);
+            for(int j = i + 1; j < balls.length; j++){
+                if(balls[j].getWeight() < min.getWeight()){
+                    min = balls[j];
                     minInd = j;
                 }
             }
-            temp = balls.remove(i);
-            balls.add(i, min);
-            balls.remove(minInd);
-            balls.add(minInd, temp);
+            temp = balls[i];
+            balls[i] = balls[minInd];
+            balls[minInd] = temp;
         }
         basket.setBalls(balls);
     }
 
     public void colorSort(Basket basket){
-        List<Ball> balls= basket.getBalls();
+        Ball[] balls = basket.getBalls();
         Ball current;
-        for(int i = 1; i < balls.size(); i++){
-            current = balls.get(i);
+        for(int i = 1; i < balls.length; i++){
+            current = balls[i];
             int j = i - 1;
-            while(j >= 0 && (balls.get(j).getColor().ordinal() > current.getColor().ordinal())){
-                balls.add(j+1, balls.get(j));
-                balls.remove(j);
+            while(j >= 0 && (balls[j].getColor().ordinal() > current.getColor().ordinal())){
+                balls[j + 1] = balls[j];
                 j--;
             }
-            balls.add(j+1, current);
-            balls.remove(balls.lastIndexOf(current));
+            balls[j + 1] = current;
         }
         basket.setBalls(balls);
     }
 
+    public Ball[] findBallsByColor(Basket basket, Color color) throws NoSuchElementsException{
+        Ball[] balls = basket.getBalls();
+        int count = amountBallsOneColor(basket, color);
+        if(count == 0){
+            throw new NoSuchElementsException("there is no balls of this color.");
+        }
+        Ball[] coloredBalls = new Ball[count];
+        int ind = 0;
+        for (Ball ball : balls){
+            if(ball.getColor() == color) {
+                coloredBalls[ind] = ball;
+                ind++;
+            }
+        }
+        return coloredBalls;
+    }
+
+    public Ball[] findBallsByWeight(Basket basket, int weight) throws NoSuchElementsException{
+        Ball[] balls = basket.getBalls();
+        int count = 0;
+        for (Ball ball : balls){
+            if(ball.getWeight() == weight){
+                count++;
+            }
+        }
+        if(count == 0){
+            throw new NoSuchElementsException("there is no balls of this weight.");
+        }
+        Ball[] outputBalls = new Ball[count];
+        int ind = 0;
+        for (Ball ball : balls){
+            if(ball.getWeight() == weight) {
+                outputBalls[ind] = ball;
+                ind++;
+            }
+        }
+        return outputBalls;
+    }
 }

@@ -10,6 +10,8 @@ public class Ball {
         this.weight = weight;
     }
 
+    public Ball(){}
+
     public Color getColor() {
         return color;
     }

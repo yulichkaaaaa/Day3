@@ -1,31 +1,21 @@
 package com.epam.basket.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Basket {
 
-    private List<Ball> balls;
+    private Ball[] balls;
 
-    public Basket(List<Ball> balls) {
-        this.balls =  new ArrayList<Ball>();
-        this.balls.addAll(balls);
+    public Basket(Ball[] balls) {
+        this.balls =  balls;
     }
 
-    public List<Ball> getBalls() {
-        return new ArrayList<>(balls);
-    }
+    public Basket(){}
 
-    public void setBalls(List<Ball> balls) {
+    public void setBalls(Ball[] balls) {
         this.balls = balls;
     }
 
-    public void addBall(Ball ball){
-        balls.add(ball);
-    }
-
-    public void removeBall(Ball ball){
-        balls.remove(ball);
+    public Ball[] getBalls() {
+        return balls;
     }
 
     @Override
